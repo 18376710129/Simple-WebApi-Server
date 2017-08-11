@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+    <description>API安全控制</description>
+
+    <bean id="authenticationManager" class="cn.zry.modules.security.rest.DefaultAuthenticationManager">
+        <property name="userManager" ref="authUserManager"/>
+    </bean>
+
+    <bean id="sessionManager" class="cn.zry.modules.security.rest.SessionManagerRedis">
+        <property name="shardedJedisPool" ref="shardedJedisPool"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <description>Mongo Client</description>
+
+    <context:component-scan base-package="cn.zry">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- mongo -->
+
+    <bean id="morphia" class="org.mongodb.morphia.Morphia"/>
+
+    <bean id="datastore" class="cn.zry.modules.data.mongo.DatastoreFactory">
+        <property name="mongoClient" ref="mongoClient"/>
+        <property name="morphia" ref="morphia"/>
+        <property name="dbName" value="test"/>
+    </bean>
+
+</beans>

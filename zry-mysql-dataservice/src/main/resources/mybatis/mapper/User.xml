@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zry.mybatis.dao.UserDao">
+    <resultMap id="userResultMap" type="cn.zry.mybatis.entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="user_name"  jdbcType="VARCHAR" />
+        <result property="realName" column="real_name"  jdbcType="VARCHAR" />
+        <result property="password" column="password" jdbcType="VARCHAR" />
+        <result property="openId" column="open_id" jdbcType="VARCHAR" />
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP" />
+        <result property="status" column="status" jdbcType="INTEGER" />
+        <result property="roleId" column="role_id" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="userResultMap">
+        select * from tb_user where id = #{id}
+    </select>
+
+    <insert id="save" parameterType="User">
+        insert into tb_user(id, user_name, real_name, password, open_id, create_date, status, role_id)
+        values(#{id}, #{username}, #{realName},#{password}, #{openId}, #{createDate},#{status}, #{roleId});
+    </insert>
+
+    <update id="update" parameterType="User">
+        update tb_user set
+        user_name = #{username},
+        real_name = #{realName},
+        password = #{password},
+        open_id = #{openId},
+        status = #{status},
+        role_id = #{roleId}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from tb_user where id = #{id}
+    </delete>
+
+    <select id="getUserByUsername" parameterType="string" resultMap="userResultMap">
+        select * from tb_user where user_name = #{0}
+    </select>
+
+</mapper>
